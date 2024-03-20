@@ -1,0 +1,5 @@
+Just Install
+
+```
+npm install
+```
