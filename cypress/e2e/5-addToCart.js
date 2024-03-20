@@ -62,3 +62,5 @@ describe("Test Suite - Sauce Demo - Feature : Add To Cart ", () => {
     CartPage.getButtonCheckOut().click()
   });
 });
+
+//komentar

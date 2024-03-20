@@ -9,3 +9,5 @@ describe("Test Suite - Test Suite - Sauce Demo - Feature : Logout", () => {
     cy.url().should("eq", Cypress.env("links").live)
   });
 });
+
+//komentar

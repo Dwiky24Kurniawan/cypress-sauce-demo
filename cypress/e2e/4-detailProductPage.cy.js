@@ -17,3 +17,5 @@ describe("Test Suite - Sauce Demo - Feature : Detail Product Page", () => {
     DetailProductsPage.getButtonAddOrRemoveToCart();
   });
 });
+
+//komentar
