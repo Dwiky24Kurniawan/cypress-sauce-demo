@@ -24,8 +24,8 @@ Cypress.Commands.add(
     const username = user.username;
     const password = user.password;
 
-    LoginPage.getTextboxUsername().clear().type(username);
-    LoginPage.getTextboxPassbord().clear().type(password);
+    LoginPage.getTextFieldUsername().clear().type(username);
+    LoginPage.getTextFieldPassword().clear().type(password);
     LoginPage.getButtonLogin().click();
     LoginPage.AssertSuccessLoginURL();
     LoginPage.AssertAppLogo();
