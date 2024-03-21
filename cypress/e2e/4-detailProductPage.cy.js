@@ -1,7 +1,6 @@
 import { ProductsPage, DetailProductsPage } from "../pageobjects";
 
 beforeEach(() => {
-  // cy.setSessionStorage("cart-contents", "[]");
   cy.login("live", "standard_user");
 });
 
@@ -17,5 +16,3 @@ describe("Test Suite - Sauce Demo - Feature : Detail Product Page", () => {
     DetailProductsPage.getButtonAddOrRemoveToCart();
   });
 });
-
-//komentar
