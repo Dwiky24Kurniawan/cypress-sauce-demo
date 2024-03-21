@@ -1,38 +1,38 @@
 [
   {
-      "username": "",
-      "password": "WrongPass1234!#",
-      "test_case": "null username",
-      "message": "Epic sadface: Username is required"
-  }, 
-  {
-      "username": "wrong_username",
-      "password": "",
-      "test_case": "null password",
-      "message": "Epic sadface: Password is required"
+    "username": "",
+    "password": "WrongPass1234!#",
+    "test_case": "null username",
+    "message": "Epic sadface: Username is required"
   },
   {
-      "username": "wrong_username",
-      "password": "WrongPass1234!#",
-      "test_case": "invalid username and password",
-      "message": "Epic sadface: Username and password do not match any user in this service"
-  }, 
+    "username": "wrong_username",
+    "password": "",
+    "test_case": "null password",
+    "message": "Epic sadface: Password is required"
+  },
   {
-      "username": "standard_user",
-      "password": "WrongPass1234!#",
-      "test_case": "valid username but invalid password",
-      "message": "Epic sadface: Username and password do not match any user in this service"
-  }, 
+    "username": "wrong_username",
+    "password": "WrongPass1234!#",
+    "test_case": "invalid username and password",
+    "message": "Epic sadface: Username and password do not match any user in this service"
+  },
   {
-      "username": "wrong_username",
-      "password": "secret_sauce",
-      "test_case": "invalid username but valid password",
-      "message": "Epic sadface: Username and password do not match any user in this service"
-  }, 
+    "username": "standard_user",
+    "password": "WrongPass1234!#",
+    "test_case": "valid username but invalid password",
+    "message": "Epic sadface: Username and password do not match any user in this service"
+  },
   {
-      "username": "",
-      "password": "",
-      "test_case": "null password and username",
-      "message": "Epic sadface: Username is required"
+    "username": "wrong_username",
+    "password": "secret_sauce",
+    "test_case": "invalid username but valid password",
+    "message": "Epic sadface: Username and password do not match any user in this service"
+  },
+  {
+    "username": "",
+    "password": "",
+    "test_case": "null password and username",
+    "message": "Epic sadface: Username is required"
   }
 ]
