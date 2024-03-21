@@ -1,4 +1,8 @@
 {
+  "scripts": {
+    "test": "npx cypress run --browser chrome",
+    "open:cypress": "npx cypress open"
+  },
   "devDependencies": {
     "cypress": "^13.7.0",
     "cypress-mochawesome-reporter": "^3.8.2",
