@@ -13,6 +13,8 @@ export let ProductsPage = {
 
   getInventoryItems: () => cy.get(".inventory_item").should("be.visible"),
 
+  addProductToTheCart: (position) => cy.get('.btn_inventory').eq(position).click(),
+
   getShoppingCartBadge: () => cy.get(".shopping_cart_badge").should("be.visible"),
 
   getShoppingCartButton: () => cy.get("#shopping_cart_container").should("be.visible"),
