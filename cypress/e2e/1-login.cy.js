@@ -19,5 +19,3 @@ describe("Test Suite - Sauce Demo - Feature : Login", () => {
     });
   });
 });
-
-//komentar
