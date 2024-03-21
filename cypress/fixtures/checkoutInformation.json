@@ -1,0 +1,40 @@
+{
+  "validData": [
+    {
+      "firstname": "Dwiky",
+      "lastname": "Kurniawan",
+      "postalcode": "55142",
+      "test_case": "valid data"
+    }
+  ],
+  "invalidData": [
+    {
+      "firstname": "",
+      "lastname": "Kurniawan",
+      "postalcode": "55142",
+      "test_case": "null firstname",
+      "message": "Error: First Name is required"
+    },
+    {
+      "firstname": "Dwiky",
+      "lastname": "",
+      "postalcode": "55142",
+      "test_case": "null lastname",
+      "message": "Error: Last Name is required"
+    },
+    {
+      "firstname": "Dwiky",
+      "lastname": "Kurniawan",
+      "postalcode": "",
+      "test_case": "null postal code",
+      "message": "Error: Postal Code is required"
+    },
+    {
+      "firstname": "",
+      "lastname": "",
+      "postalcode": "",
+      "test_case": "null firstname, lastname and postalcode",
+      "message": "Error: First Name is required"
+    }
+  ]
+}

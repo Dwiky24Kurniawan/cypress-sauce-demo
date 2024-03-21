@@ -11,9 +11,9 @@ describe("Test Suite - Sauce Demo - Feature : Login", () => {
       // const links = Cypress.env("links").live;
       cy.visit(Cypress.env("links").live);
       if (element.username != "")
-        LoginPage.getTextboxUsername().clear().type(element.username);
+        LoginPage.getTextFieldUsername().clear().type(element.username);
       if (element.password != "")
-        LoginPage.getTextboxPassbord().clear().type(element.password);
+        LoginPage.getTextFieldPassword().clear().type(element.password);
       LoginPage.getButtonLogin().click();
       LoginPage.AssertLoginWithInvalidData().should("have.text", element.message);
     });
