@@ -9,7 +9,7 @@ module.exports = defineConfig({
     },
     cypressMochawesomeReporterReporterOptions: {
       charts: true,
-      reportPageTitle: 'Report of Web UI Testing - Sauce Demo',
+      reportPageTitle: 'Report of UI Testing - Sauce Demo',
     },
   },
   e2e: {
