@@ -128,25 +128,26 @@ describe("Test Suite - Sauce Demo - Feature : Add To Cart ", () => {
 
       ProductsPage.getShoppingCartButton().click();
       CartPage.AssertCartURL();
-      CartPage.getCartListItems().first().as("cartListItems");
-
-      cy.get("@cartListItems")
+      CartPage.getCartListItems().its("length").should("be.greaterThan", 1);
+      CartPage.getCartListItems().each(($el) => {
+        cy.wrap($el)
         .find(".inventory_item_name")
         .invoke("text")
         .its("length")
         .should("be.gt", 1);
 
-      cy.get("@cartListItems")
+        cy.wrap($el)
         .find(".inventory_item_desc")
         .invoke("text")
         .its("length")
         .should("be.gt", 1);
 
-      cy.get("@cartListItems")
+        cy.wrap($el)
         .find(".inventory_item_price")
         .invoke("text")
         .its("length")
         .should("be.gt", 1);
+      })
 
       CartPage.getButtonCheckOut().click();
       CheckoutPage.AssertCheckoutStepOneURL();
