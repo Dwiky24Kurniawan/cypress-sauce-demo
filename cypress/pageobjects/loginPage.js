@@ -1,19 +1,39 @@
-export let LoginPage = {
-  getTextFieldUsername: () => cy.get("#user-name").should("be.visible"),
-  
-  getTextFieldPassword: () => cy.get("#password").should("be.visible"),
+class LoginPage{
+    
+    fieldUsername = "#user-name";
+    fieldPassword = "#password";
+    loginBtn = "#login-button";
+    appLogo = ".app_logo";
+    titleProduct = ".title";
+    errorMessage = ".error-message-container";
 
-  getButtonLogin: () => cy.get("#login-button").should("be.visible"),
+    inputUsername(input){
+      cy.get(this.fieldUsername).type(input);
+    }
 
-  AssertSuccessLoginURL: () =>
-    cy.url().should("include", "/inventory.html"),
+    inputPassword(input){
+      cy.get(this.fieldPassword).type(input);
+    }
 
-  AssertAppLogo: () =>
-    cy.get(".app_logo").should("have.text", "Swag Labs").and("be.visible"),
+    clickLoginBtn(){
+      cy.get(this.loginBtn).click();
+    }
 
-  AssertProductsText: () =>
-    cy.get(".title").should("have.text", "Products").and("be.visible"),
+    assertErrorMessage(msg){
+      cy.get(this.errorMessage).should("have.text", msg)
+    }
 
-  AssertLoginWithInvalidData: () =>
-    cy.get(".error-message-container").should("be.visible"),
-};
+    assertSuccessLoginURL(){
+      cy.url().should("include", "/inventory.html")
+    }
+
+    assertAppLogo(){
+      cy.get(this.appLogo).should("have.text", "Swag Labs").and("be.visible")
+    }
+
+    assertProductsText(){
+      cy.get(this.titleProduct).should("have.text", "Products").and("be.visible")
+    }
+}
+
+module.exports = new LoginPage();
