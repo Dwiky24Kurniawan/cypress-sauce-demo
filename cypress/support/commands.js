@@ -1,4 +1,4 @@
-import { LoginPage } from "../pageobjects";
+import loginPage from "../pageobjects/LoginPage";
 
 // ***********************************************
 // This example commands.js shows you how to
@@ -24,12 +24,12 @@ Cypress.Commands.add(
     const username = user.username;
     const password = user.password;
 
-    LoginPage.getTextFieldUsername().clear().type(username);
-    LoginPage.getTextFieldPassword().clear().type(password);
-    LoginPage.getButtonLogin().click();
-    LoginPage.AssertSuccessLoginURL();
-    LoginPage.AssertAppLogo();
-    LoginPage.AssertProductsText();
+    loginPage.inputUsername(username);
+    loginPage.inputPassword(password);
+    loginPage.clickLoginBtn();
+    loginPage.assertSuccessLoginURL();
+    loginPage.assertAppLogo();
+    loginPage.assertProductsText();
   },
   {
     cacheAcrossSpecs: true,
