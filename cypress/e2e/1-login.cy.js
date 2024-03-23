@@ -1,5 +1,5 @@
 import data from "../fixtures/login.json";
-import loginPage from "../pageobjects/LoginPage";
+import loginPage from "../pageobjects/loginPage";
 
 describe("Test Suite - Sauce Demo - Feature : Login", () => {
   

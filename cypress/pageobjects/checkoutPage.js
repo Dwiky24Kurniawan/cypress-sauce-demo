@@ -1,40 +1,124 @@
-export let CheckoutPage = {
-    AssertCheckoutStepOneURL: () =>
-    cy.url().should("include", "/checkout-step-one.html"),
+class CheckoutPage {
+  checkoutInformationHeaderText = ".title";
+  fieldFirstName = "#first-name";
+  fieldLastName = "#last-name";
+  fieldPostalCode = "#postal-code";
+  continueBtn = "#continue";
+  errorMessage = ".error-message-container";
+  checkoutOverviewHeaderText = ".title";
+  checkoutOverviewItems = ".cart_item";
+  inventoryItemName = ".inventory_item_name";
+  inventoryItemDesc = ".inventory_item_desc";
+  inventoryItemPrice = ".inventory_item_price";
+  totalPrice = ".summary_subtotal_label";
+  finishBtn = "#finish";
+  checkoutComplete = ".title";
+  thankYou = ".complete-header";
 
-    AssertCheckoutInformationHeaderText: () =>
-    cy.get(".title").should("have.text", "Checkout: Your Information").and("be.visible"),
+  assertCheckoutStepOneURL() {
+    cy.url().should("include", "/checkout-step-one.html");
+  }
 
-    getTextFieldFirstName: () => cy.get("#first-name").should("be.visible"),
+  assertCheckoutInformationHeaderText() {
+    cy.get(this.checkoutInformationHeaderText)
+      .should("have.text", "Checkout: Your Information")
+      .and("be.visible");
+  }
 
-    getTextFieldLastName: () => cy.get("#last-name").should("be.visible"),
+  inputFirstname(firstname) {
+    cy.get(this.fieldFirstName).should("be.visible").type(firstname);
+  }
 
-    getTextFieldPostalCode: () => cy.get("#postal-code").should("be.visible"),
+  inputLastname(lastname) {
+    cy.get(this.fieldLastName).should("be.visible").type(lastname);
+  }
 
-    getButtonContinue: () => cy.get("#continue").should("be.visible"),
+  inputPostalCode(postalcode) {
+    cy.get(this.fieldPostalCode).should("be.visible").type(postalcode);
+  }
 
-    AssertCheckoutWithInvalidData: () =>
-    cy.get(".error-message-container").should("be.visible"),
+  clickContinueBtn() {
+    cy.get(this.continueBtn).should("be.visible").click();
+  }
 
-    AssertCheckoutStepTwoURL: () =>
-    cy.url().should("include", "/checkout-step-two.html"),
+  assertErrorMessage(msg) {
+    cy.get(this.errorMessage).should("have.text", msg);
+  }
 
-    AssertCheckoutOverviewHeaderText: () =>
-    cy.get(".title").should("have.text", "Checkout: Overview").and("be.visible"),
+  assertCheckoutStepTwoURL() {
+    cy.url().should("include", "/checkout-step-two.html");
+  }
 
-    getCheckoutOverviewItems: () => cy.get(".cart_item").should("be.visible"),
+  assertCheckoutOverviewHeaderText() {
+    cy.get(this.checkoutOverviewHeaderText)
+      .should("have.text", "Checkout: Overview")
+      .and("be.visible");
+  }
 
-    getOverviewItemPrice: () => cy.get(".inventory_item_price").should("be.visible"),
+  assertCheckoutOverviewItems() {
+    cy.get(this.checkoutOverviewItems)
+      .should("be.visible")
+      .its("length")
+      .should("be.greaterThan", 1);
 
-    getPriceTotal: () => cy.get(".summary_subtotal_label").should("be.visible"),
+    cy.get(this.inventoryItemName)
+      .should("be.visible")
+      .invoke("text")
+      .its("length")
+      .should("be.greaterThan", 1);
 
-    getButtonFinish: () => cy.get("#finish").should("be.visible"),
+    cy.get(this.inventoryItemDesc)
+      .should("be.visible")
+      .invoke("text")
+      .its("length")
+      .should("be.greaterThan", 1);
 
-    AssertCheckoutComplete: () =>
-    cy.url().should("include", "/checkout-complete.html"),
+    cy.get(this.inventoryItemPrice)
+      .should("be.visible")
+      .invoke("text")
+      .its("length")
+      .should("be.greaterThan", 1);
+  }
 
-    AssertCheckoutCompleteHeaderText: () =>
-    cy.get(".title").should("have.text", "Checkout: Complete!").and("be.visible"),
+  assertTotalPrice() {
+    cy.get(this.inventoryItemPrice).then(($el) => {
+      const price = $el
+        .toArray()
+        .map((el) => el.innerText)
+        .map((s) => s.replace("$", ""))
+        .map(parseFloat);
+      const sumPrice = Cypress._.sum(price);
 
-    AssertThankYouForYourOrder: () => cy.get(".complete-header").should("have.text", "Thank you for your order!").and("be.visible"),
+      cy.get(this.totalPrice)
+        .should("be.visible")
+        .invoke("text")
+        .invoke("split", " ")
+        .invoke("find", (s) => s.startsWith("$"))
+        .then((s) => s.replace("$", ""))
+        .then(parseFloat)
+        .should("equal", sumPrice);
+    });
+  }
+
+  clickFinishBtn() {
+    cy.get(this.finishBtn).should("be.visible").click();
+  }
+
+  assertCheckoutCompleteURL() {
+    cy.url().should("include", "/checkout-complete.html");
+  }
+
+  assertCheckoutComplete() {
+    cy.get(this.checkoutComplete)
+      .should("have.text", "Checkout: Complete!")
+      .and("be.visible");
+  }
+
+  assertThankYouForYourOrder() {
+    cy.get(this.thankYou)
+      .should("have.text", "Thank you for your order!")
+      .and("be.visible");
+  }
 }
+
+module.exports = new CheckoutPage();

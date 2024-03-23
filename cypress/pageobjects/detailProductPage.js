@@ -1,29 +1,42 @@
-export let DetailProductsPage = {
-  AssertDetailInventoryURL: () =>
-    cy.url().should("include", "/inventory-item.html"),
+class DetailProductPage {
+  detailInventoryImage = ".inventory_details_img";
+  detailInventoryName = ".inventory_details_name";
+  detailInventoryDesc = ".inventory_details_desc";
+  detailInventoryPrice = ".inventory_details_price";
+  detailInnventoryBtn = "button[id*=add-to-cart]";
 
-  getDetailInventoryImage: () => cy.get(".inventory_details_img").should("be.visible").and('have.attr', 'src'),
+  assertDetailInventoryURL() {
+    cy.url().should("include", "/inventory-item.html");
+  }
 
-  getDetailInventoryName: () => cy.get(".inventory_details_name")
-    .should("be.visible")
-    .invoke("text")
-    .its("length")
-    .should("be.greaterThan", 1),
+  assertDetailInventoryItemVisible() {
+    cy.get(this.detailInventoryImage)
+      .should("be.visible")
+      .and("have.attr", "src");
 
-  getDetailInventoryDesc: () => cy.get(".inventory_details_desc")
-    .should("be.visible")
-    .invoke("text")
-    .its("length")
-    .should("be.greaterThan", 1),
+    cy.get(this.detailInventoryName)
+      .should("be.visible")
+      .invoke("text")
+      .its("length")
+      .should("be.greaterThan", 1);
 
-  getDetailInventoryPrice: () => cy.get(".inventory_details_price")
-    .should("be.visible")
-    .invoke("text")
-    .its("length")
-    .should("be.greaterThan", 1),
+    cy.get(this.detailInventoryDesc)
+      .should("be.visible")
+      .invoke("text")
+      .its("length")
+      .should("be.greaterThan", 1);
 
-  getButtonAddOrRemoveToCart: () =>
-    cy.get("button[id*=add-to-cart]")
-    .invoke('text')
-    .should("be.oneOf", ["Add to cart", "Remove"])
-};
+    cy.get(this.detailInventoryPrice)
+      .should("be.visible")
+      .invoke("text")
+      .its("length")
+      .should("be.greaterThan", 1);
+
+    cy.get(this.detailInnventoryBtn).each((text) => {
+      expect(text).to.be.visible;
+      expect(text.text()).to.be.oneOf(["Add to cart", "Remove"]);
+    });
+  }
+}
+
+module.exports = new DetailProductPage();

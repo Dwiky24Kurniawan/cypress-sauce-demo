@@ -1,4 +1,4 @@
-import loginPage from "../pageobjects/LoginPage";
+import loginPage from "../pageobjects/loginPage";
 
 // ***********************************************
 // This example commands.js shows you how to

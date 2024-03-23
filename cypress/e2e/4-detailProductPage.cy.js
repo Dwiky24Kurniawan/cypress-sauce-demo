@@ -1,4 +1,5 @@
-import { ProductsPage, DetailProductsPage } from "../pageobjects";
+import productPage from "../pageobjects/productPage";
+import detailProductPage from "../pageobjects/detailProductPage";
 
 beforeEach(() => {
   cy.login("live", "standard_user");
@@ -6,13 +7,8 @@ beforeEach(() => {
 
 describe("Test Suite - Sauce Demo - Feature : Detail Product Page", () => {
   it("TC001 - Positive - Detail Product item must be visible", () => {
-    ProductsPage.getInventoryItems().first().as("inventoryItem");
-    cy.get("@inventoryItem").find(".inventory_item_name").click();
-    DetailProductsPage.AssertDetailInventoryURL();
-    DetailProductsPage.getDetailInventoryImage();
-    DetailProductsPage.getDetailInventoryName();
-    DetailProductsPage.getDetailInventoryDesc();
-    DetailProductsPage.getDetailInventoryPrice();
-    DetailProductsPage.getButtonAddOrRemoveToCart();
+    productPage.clickInventoryItemName();
+    detailProductPage.assertDetailInventoryURL();
+    detailProductPage.assertDetailInventoryItemVisible();
   });
 });
