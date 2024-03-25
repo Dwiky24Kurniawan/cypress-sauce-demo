@@ -38,8 +38,10 @@ describe("Test Suite - Sauce Demo - Feature : Add To Cart ", () => {
     checkoutPage.assertThankYouForYourOrder();
   });
 
-  invalidData.forEach((element) => {
-    it("TC002 - Negative - Checkout with " + element.test_case, () => {
+  invalidData.forEach((element, index) => {
+    const testNumber = index + 3; // Mulai dari TC002, jadi tambahkan 2
+    const testCaseNumber = "TC00" + testNumber;
+    it(testCaseNumber + " - Negative - Checkout with " + element.test_case, () => {
       productPage.clickInventoryItemButtons();
       productPage.assertShoppingCartBadgeCount();
       productPage.clickShoppingCartBtn();

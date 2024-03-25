@@ -7,8 +7,10 @@ describe("Test Suite - Sauce Demo - Feature : Login", () => {
     cy.login("live", "standard_user");
   });
 
-  data.forEach((element) => {
-    it("TC002 - Negative - " + element.test_case, () => {
+  data.forEach((element, index) => {
+    const testNumber = index + 2; // Mulai dari TC002, jadi tambahkan 2
+    const testCaseNumber = "TC00" + testNumber;
+    it(testCaseNumber + " - Negative - " + element.test_case, () => {
       cy.visit(Cypress.env("links").live);
       if (element.username != "")
         loginPage.inputUsername(element.username);
