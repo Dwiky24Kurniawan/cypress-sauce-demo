@@ -11,5 +11,6 @@ describe("Test Suite - Sauce Demo - Feature : Products Page", () => {
 
   it("TC002 - Positive - Filter by name", () => {
     productPage.clickFilterBtn();
+    productPage.assertFilter();
   });
 });

@@ -65,20 +65,36 @@ class ProductPage {
     cy.get(this.inventoryItems).first().find(".inventory_item_name").click();
   }
 
-  addSomeItemsToCart() {
-    let inCart = 0;
+  clickInventoryItemButtons() {
     cy.get(this.inventoryItems)
       .each(($el, index) => {
         if (index % 2 == 0) {
           cy.wrap($el).find(this.inventoryItemBtn).click();
-          inCart++;
         }
-      })
-      .then(() => {
-        cy.get(this.shoppingCartBadge)
-          .should("have.text", "" + inCart)
-          .and("be.visible");
       });
+  }
+
+  countItemsInCart() {
+    return new Cypress.Promise(resolve => {
+      let inCart = 0;
+      cy.get(this.inventoryItems)
+        .each(($el, index) => {
+          if (index % 2 == 0) {
+            inCart++;
+          }
+        })
+        .then(() => {
+          resolve(inCart);
+        });
+    });
+  }
+
+  assertShoppingCartBadgeCount() {
+    this.countItemsInCart().then(itemCount => {
+      cy.get(this.shoppingCartBadge)
+        .should("have.text", "" + itemCount)
+        .and("be.visible");
+    });
   }
 
   clickShoppingCartBtn() {
@@ -86,6 +102,10 @@ class ProductPage {
   }
 
   clickFilterBtn() {
+    cy.get(this.filterBtn).should("be.visible").select("Name (Z to A)");
+  }
+
+  assertFilter() {
     let productNames = [];
     cy.get(this.inventoryItems).each(($el) => {
       cy.wrap($el).invoke("text").as("product_name");
@@ -94,13 +114,11 @@ class ProductPage {
       });
     });
 
-    cy.get(this.filterBtn).should("be.visible").select("Name (Z to A)");
+    // Sort productNames in descending order
+    productNames.sort((a, b) => b.localeCompare(a));
 
     cy.get(this.inventoryItems).each(($el, index) => {
-      cy.wrap($el).should(
-        "have.text",
-        productNames[productNames.length - index - 1]
-      );
+      cy.wrap($el).should("have.text", productNames[index]);
     });
   }
 }

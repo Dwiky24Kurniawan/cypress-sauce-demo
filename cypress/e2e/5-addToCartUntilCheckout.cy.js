@@ -9,11 +9,13 @@ beforeEach(() => {
 
 describe("Test Suite - Sauce Demo - Feature : Add To Cart ", () => {
   it("TC001 - Positive - Add To Cart", () => {
-    productPage.addSomeItemsToCart();
+    productPage.clickInventoryItemButtons();
+    productPage.assertShoppingCartBadgeCount();
   });
 
   it("TC002 - Positive - E2E Checkout with valid data information", () => {
-    productPage.addSomeItemsToCart();
+    productPage.clickInventoryItemButtons();
+    productPage.assertShoppingCartBadgeCount();
     productPage.clickShoppingCartBtn();
     cartPage.assertCartURL();
     cartPage.assertCartListItems();
@@ -38,7 +40,8 @@ describe("Test Suite - Sauce Demo - Feature : Add To Cart ", () => {
 
   invalidData.forEach((element) => {
     it("TC002 - Negative - Checkout with " + element.test_case, () => {
-      productPage.addSomeItemsToCart();
+      productPage.clickInventoryItemButtons();
+      productPage.assertShoppingCartBadgeCount();
       productPage.clickShoppingCartBtn();
       cartPage.assertCartURL();
       cartPage.assertCartListItems();
