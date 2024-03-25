@@ -1,8 +1,42 @@
-export let CartPage = {
-    getCartListItems: () => cy.get(".cart_item").should("be.visible"),
+class CartPage {
+  cartListItems = ".cart_item";
+  checkoutBtn = "#checkout";
+  inventoryItemName = ".inventory_item_name";
+  inventoryItemDesc = ".inventory_item_desc";
+  inventoryItemPrice = ".inventory_item_price";
 
-    getButtonCheckOut: () => cy.get("#checkout").should("be.visible"),
+  assertCartURL() {
+    cy.url().should("include", "/cart.html");
+  }
 
-    AssertCartURL: () =>
-    cy.url().should("include", "/cart.html"),
+  assertCartListItems() {
+    cy.get(this.cartListItems)
+      .should("be.visible")
+      .its("length")
+      .should("be.greaterThan", 1);
+
+    cy.get(this.inventoryItemName)
+      .should("be.visible")
+      .invoke("text")
+      .its("length")
+      .should("be.greaterThan", 1);
+
+    cy.get(this.inventoryItemDesc)
+      .should("be.visible")
+      .invoke("text")
+      .its("length")
+      .should("be.greaterThan", 1);
+
+    cy.get(this.inventoryItemPrice)
+      .should("be.visible")
+      .invoke("text")
+      .its("length")
+      .should("be.greaterThan", 1);
+  }
+
+  clickCheckoutBtn() {
+    cy.get(this.checkoutBtn).should("be.visible").click();
+  }
 }
+
+module.exports = new CartPage();
