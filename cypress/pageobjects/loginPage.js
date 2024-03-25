@@ -26,6 +26,10 @@ class LoginPage {
     cy.url().should("include", "/inventory.html");
   }
 
+  assertNavigateToLoginPage(){
+    cy.url().should("eq", Cypress.env("links").live);
+  }
+
   assertAppLogo() {
     cy.get(this.appLogo).should("have.text", "Swag Labs").and("be.visible");
   }
